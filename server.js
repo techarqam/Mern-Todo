@@ -5,6 +5,7 @@ const passport = require("passport");
 const app = express();
 
 const users = require("./routes/api/users");
+const todos = require("./routes/api/todo");
 
 
 app.use(
@@ -30,6 +31,7 @@ app.use(passport.initialize());
 require("./config/passport")(passport);
 // Routes
 app.use("/api/users", users);
+app.use("/api/todos", todos);
 
 
 
