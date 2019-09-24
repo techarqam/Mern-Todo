@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
 import CreateTodo from "../todos/create-todo.component";
+import TodoLists from "../todos/todos-list.component";
 
 
 import { logoutUser } from "../../actions/authActions";
@@ -15,7 +16,10 @@ class Dashboard extends Component {
         const { user } = this.props.auth;
         return (
 
-            <CreateTodo />
+            // <CreateTodo />
+
+            <TodoLists />
+
             // <div style={{ height: "75vh" }} className="container valign-wrapper">
             //     <div className="row">
             //         <div className="col s12 center-align">

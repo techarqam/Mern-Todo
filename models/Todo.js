@@ -9,6 +9,10 @@ const TodoSchema = new Schema({
     description: {
         type: String,
     },
+    user: {
+        type: String,
+        required: true,
+    },
     completed: {
         type: Boolean,
         required: true,

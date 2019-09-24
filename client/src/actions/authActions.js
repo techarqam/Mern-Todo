@@ -76,3 +76,19 @@ export const addTodo = (newTodo, history) => dispatch => {
             })
         );
 };
+// Get All Todos
+export const getAllTodos = (uid, history) => dispatch => {
+    // let user = {
+    //     uid: this.props.auth.user.id
+    // }
+
+    axios
+        .post("/api/todos/getalltodos", uid)
+        // .then(res => history.push("/login")) 
+        .catch(err =>
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            })
+        );
+};

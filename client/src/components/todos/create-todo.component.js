@@ -35,13 +35,14 @@ class CreateTodo extends Component {
             name: this.state.name,
             description: this.state.description,
             completed: false,
+            user: this.props.auth.user.id
         }
         this.props.addTodo(newTodo);
-
         this.setState({
             name: '',
             description: '',
             completed: false,
+            user: this.props.auth.user.id
         })
     }
 
