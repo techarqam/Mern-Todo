@@ -65,10 +65,10 @@ export const logoutUser = () => dispatch => {
 };
 
 // Add Todo
-export const addTodo = (newTodo, history) => dispatch => {
-    axios
+export const addTodo = (newTodo) => dispatch => {
+    return axios
         .post("/api/todos/todo", newTodo)
-        // .then(res => history.push("/login")) 
+        // .then(res => history.push("/dashboard"))
         .catch(err =>
             dispatch({
                 type: GET_ERRORS,
@@ -78,13 +78,36 @@ export const addTodo = (newTodo, history) => dispatch => {
 };
 // Get All Todos
 export const getAllTodos = (uid, history) => dispatch => {
-    // let user = {
-    //     uid: this.props.auth.user.id
-    // }
-
-    axios
-        .post("/api/todos/getalltodos", uid)
-        // .then(res => history.push("/login")) 
+    return axios.post("/api/todos/getalltodos", { user: uid })
+        .then(todos => {
+            return todos;
+        })
+        .catch(err =>
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            })
+        );
+};
+// Get All Todos
+export const updateTodoStatus = (updatedTodo, history) => dispatch => {
+    return axios.post("/api/todos/updatedTodo", { todo: updatedTodo })
+        // .then(todos => {
+        //     return todos;
+        // })
+        .catch(err =>
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            })
+        );
+};
+// Get All Todos
+export const deleteTodo = (delTodoId, history) => dispatch => {
+    return axios.post("/api/todos/deleteTodo", { todo: delTodoId })
+        .then(todos => {
+            return todos;
+        })
         .catch(err =>
             dispatch({
                 type: GET_ERRORS,

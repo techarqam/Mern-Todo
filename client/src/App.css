@@ -1,0 +1,9 @@
+.todoName {
+  color: black;
+  font-size: 24px;
+}
+
+.i.icon-red {
+  cursor: pointer;
+  color: red;
+}

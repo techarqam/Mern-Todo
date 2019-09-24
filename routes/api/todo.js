@@ -24,17 +24,24 @@ router.post("/todo", (req, res) => {
 });
 
 router.post("/getalltodos", (req, res) => {
-
     let user = req.body.user;
     Todo.find({ user: user }, function (err, todos) {
-        var todoMap = {};
-        todos.forEach(function (todo) {
-            todoMap[todo._id] = todo;
-        });
-        res.send(todoMap);
+        res.send(todos);
     });
+});
 
-
+router.post("/updatedTodo", (req, res) => {
+    let todoStatus = req.body.todo;
+    Todo.findByIdAndUpdate(todoStatus._id, todoStatus, function (err, todos) {
+        res.send("Updated");
+    })
+});
+router.post("/deleteTodo", (req, res) => {
+    let todo = req.body.todo;
+    console.log(todo);
+    Todo.findByIdAndDelete(todo, function (err, todos) {
+        res.send("Deleted");
+    })
 });
 
 

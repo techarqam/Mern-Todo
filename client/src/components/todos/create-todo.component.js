@@ -37,12 +37,15 @@ class CreateTodo extends Component {
             completed: false,
             user: this.props.auth.user.id
         }
-        this.props.addTodo(newTodo);
-        this.setState({
-            name: '',
-            description: '',
-            completed: false,
-            user: this.props.auth.user.id
+        this.props.addTodo(newTodo).then(() => {
+
+            this.setState({
+                name: '',
+                description: '',
+                completed: false,
+                user: this.props.auth.user.id
+            });
+            window.location.href = "./dashboard";
         })
     }
 
@@ -102,7 +105,8 @@ class CreateTodo extends Component {
                                         width: "150px",
                                         borderRadius: "3px",
                                         letterSpacing: "1.5px",
-                                        marginTop: "1rem"
+                                        marginTop: "1rem",
+                                        float: "right"
                                     }}
                                     type="submit"
                                     className="btn btn-large waves-effect waves-light hoverable blue accent-3"

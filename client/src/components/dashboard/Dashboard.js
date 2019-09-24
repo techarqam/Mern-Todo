@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-
-import CreateTodo from "../todos/create-todo.component";
+import { Link } from "react-router-dom";
 import TodoLists from "../todos/todos-list.component";
 
 
@@ -13,12 +12,38 @@ class Dashboard extends Component {
         this.props.logoutUser();
     };
     render() {
-        const { user } = this.props.auth;
+        // const { user } = this.props.auth;
         return (
 
             // <CreateTodo />
+            <div>
 
-            <TodoLists />
+                <div className="container">
+                    <div style={{ marginTop: "4rem" }} className="row">
+                        <div className="col s8 offset-s2">
+
+
+                            <Link
+                                to="/create-todo"
+                                style={{
+                                    width: "140px",
+                                    borderRadius: "3px",
+                                    letterSpacing: "1.5px",
+                                    float: "right",
+                                }}
+                                className="btn  waves-effect waves-light hoverable blue accent-3"
+                            >
+                                <i className="material-icons left">add</i>
+                                Create Todo
+              </Link>
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <TodoLists />
+            </div>
 
             // <div style={{ height: "75vh" }} className="container valign-wrapper">
             //     <div className="row">
