@@ -10,9 +10,9 @@ module.exports = function validateTodo(data) {
         errors.name = "Todo name cannot be empty";
     }
     // Password checks
-    if (Validator.isEmpty(data.completed)) {
-        errors.completed = "Todo status required";
-    }
+    // if (Validator.isEmpty(data.completed)) {
+    //     errors.completed = "Todo status required";
+    // }
     return {
         errors,
         isValid: isEmpty(errors)

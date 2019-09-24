@@ -1,124 +1,132 @@
 import React, { Component } from 'react';
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { addTodo } from "../../actions/authActions";
+import classnames from "classnames";
 
-export default class CreateTodo extends Component {
+class CreateTodo extends Component {
 
 
     constructor(props) {
         super(props);
-        this.onChangeTodoDescription = this.onChangeTodoDescription.bind(this);
-        this.onChangeTodoResponsible = this.onChangeTodoResponsible.bind(this);
-        this.onChangeTodoPriority = this.onChangeTodoPriority.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
-
         this.state = {
-            todo_description: '',
-            todo_responsible: '',
-            todo_priority: '',
-            todo_completed: false
+            name: '',
+            description: '',
+            completed: '',
+            errors: {}
         }
     }
 
-    onChangeTodoDescription(e) {
-        console.log("des", e.target.value)
-        this.setState({
-            todo_description: e.target.value
-        });
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.errors) {
+            this.setState({
+                errors: nextProps.errors
+            });
+        }
     }
 
-    onChangeTodoResponsible(e) {
-        console.log("res", e.target.value)
-        this.setState({
-            todo_responsible: e.target.value
-        });
-    }
 
-    onChangeTodoPriority(e) {
-        console.log("prio", e.target.value)
-        this.setState({
-            todo_priority: e.target.value
-        });
-    }
 
     onSubmit(e) {
         e.preventDefault();
 
-        console.log(`Form submitted:`);
-        console.log(`Todo Description: ${this.state.todo_description}`);
-        console.log(`Todo Responsible: ${this.state.todo_responsible}`);
-        console.log(`Todo Priority: ${this.state.todo_priority}`);
+        const newTodo = {
+            name: this.state.name,
+            description: this.state.description,
+            completed: false,
+        }
+        this.props.addTodo(newTodo);
 
         this.setState({
-            todo_description: '',
-            todo_responsible: '',
-            todo_priority: '',
-            todo_completed: false
+            name: '',
+            description: '',
+            completed: false,
         })
     }
 
 
-    render() {
-        return (
-            <div style={{ marginTop: 10 }}>
-                <h3>Create New Todo</h3>
-                <form onSubmit={this.onSubmit}>
-                    <div className="form-group">
-                        <label>Description: </label>
-                        <input type="text"
-                            className="form-control"
-                            value={this.state.todo_description}
-                            onChange={this.onChangeTodoDescription}
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label>Responsible: </label>
-                        <input
-                            type="text"
-                            className="form-control"
-                            value={this.state.todo_responsible}
-                            onChange={this.onChangeTodoResponsible}
-                        />
-                    </div>
-                    <div className="form-group">
-                        <div className="form-check form-check-inline">
-                            <input className="form-check-input"
-                                type="radio"
-                                name="priorityOptions"
-                                id="priorityLow"
-                                value="Low"
-                                checked={this.state.todo_priority === 'Low'}
-                                onChange={this.onChangeTodoPriority}
-                            />
-                            <label className="form-check-label">Low</label>
-                        </div>
-                        <div className="form-check form-check-inline">
-                            <input className="form-check-input"
-                                type="radio"
-                                name="priorityOptions"
-                                id="priorityMedium"
-                                value="Medium"
-                                checked={this.state.todo_priority === 'Medium'}
-                                onChange={this.onChangeTodoPriority}
-                            />
-                            <label className="form-check-label">Medium</label>
-                        </div>
-                        <div className="form-check form-check-inline">
-                            <input className="form-check-input"
-                                type="radio"
-                                name="priorityOptions"
-                                id="priorityHigh"
-                                value="High"
-                                checked={this.state.todo_priority === 'High'}
-                                onChange={this.onChangeTodoPriority}
-                            />
-                            <label className="form-check-label">High</label>
-                        </div>
-                    </div>
+    onChange = e => {
+        this.setState({ [e.target.id]: e.target.value });
+    };
 
-                    <div className="form-group">
-                        <input type="submit" value="Create Todo" className="btn btn-primary" />
+
+    render() {
+        const { errors } = this.state;
+        return (
+            <div className="container">
+                <div style={{ marginTop: "4rem" }} className="row">
+                    <div className="col s8 offset-s2">
+                        <div className="col s12" style={{ paddingLeft: "11.250px" }}>
+                            <h4>Add Todo</h4>
+                        </div>
+                        <form noValidate onSubmit={this.onSubmit}>
+                            <div className="input-field col s12">
+                                <input
+                                    onChange={this.onChange}
+                                    value={this.state.name}
+                                    // error={errors.email}
+                                    id="name"
+                                    type="text"
+                                    className={classnames("", {
+                                        invalid: errors.name
+                                    })}
+                                />
+                                <label htmlFor="name">Todo Name</label>
+                                {/* <span className="red-text">
+                                    {errors.email}
+                                    {errors.emailnotfound}
+                                </span> */}
+                            </div>
+                            <div className="input-field col s12">
+                                <textarea
+                                    className="materialize-textarea"
+                                    onChange={this.onChange}
+                                    value={this.state.description}
+                                    // error={errors.password}
+                                    id="description"
+                                // className={classnames("", {
+                                //     invalid: errors.password || errors.passwordincorrect
+                                // })}
+                                ></textarea>
+                                <label htmlFor="description">Description</label>
+                                {/* <span className="red-text">
+                                    {errors.password}
+                                    {errors.passwordincorrect}
+                                </span> */}
+                            </div>
+                            <div className="col s12" style={{ paddingLeft: "11.250px" }}>
+                                <button
+                                    style={{
+                                        width: "150px",
+                                        borderRadius: "3px",
+                                        letterSpacing: "1.5px",
+                                        marginTop: "1rem"
+                                    }}
+                                    type="submit"
+                                    className="btn btn-large waves-effect waves-light hoverable blue accent-3"
+                                >
+                                    Add Todo
+                </button>
+                            </div>
+                        </form>
                     </div>
-                </form>
+                </div>
             </div>
+
         )
     }
 }
+
+CreateTodo.propTypes = {
+    auth: PropTypes.object.isRequired,
+    errors: PropTypes.object.isRequired
+};
+const mapStateToProps = state => ({
+    auth: state.auth,
+    errors: state.errors
+});
+export default connect(
+    mapStateToProps,
+    { addTodo }
+)(CreateTodo);

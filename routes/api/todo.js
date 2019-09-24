@@ -19,7 +19,7 @@ router.post("/todo", (req, res) => {
     const newTodo = new Todo({
         name: req.body.name,
         description: req.body.description,
-        completed: req.body.completed
+        // completed: req.body.completed
     });
     newTodo
         .save()

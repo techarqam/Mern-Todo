@@ -11,7 +11,8 @@ const TodoSchema = new Schema({
     },
     completed: {
         type: Boolean,
-        // required: true
+        required: true,
+        default: false
     },
     date: {
         type: Date,

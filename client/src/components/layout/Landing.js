@@ -11,10 +11,10 @@ class Landing extends Component {
                             <span style={{ fontFamily: "monospace" }}>MERN</span> stack from
                             scratch
             </h4>
-                        <p className="flow-text grey-text text-darken-1">
+                        {/* <p className="flow-text grey-text text-darken-1">
                             Create a (minimal) full-stack app with user authentication via
                             passport and JWTs
-            </p>
+            </p> */}
                         <br />
                         <div className="col s6">
                             <Link
