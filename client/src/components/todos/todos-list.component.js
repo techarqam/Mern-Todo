@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { deleteTodo, getAllTodos, updateTodoStatus } from "../../actions/authActions";
+import { Link } from "react-router-dom";
 
 class TodoLists extends Component {
 
     constructor(props) {
         super(props);
+        let { router } = this.props;
         this.state = { todos: [] };
     }
 
@@ -36,6 +38,11 @@ class TodoLists extends Component {
     handleEdit(e, id) {
         e.preventDefault();
         console.log(id);
+
+        this.props.router.push('/edit-todo', { id: id });
+
+
+
         // window.location.href = "./login";
 
 
@@ -67,16 +74,21 @@ class TodoLists extends Component {
                             float: "right"
                         }}>
 
-                            <a style={{
-                                width: "140px",
-                                borderRadius: "3px",
-                                letterSpacing: "1.5px",
-                                color: "blue",
-                                cursor: "pointer"
-                            }}
-                                onClick={e => this.handleEdit(e, todo._id)} value={todo._id}>
-                                <i className="material-icons left">create</i>
-                            </a>
+                            <Link to={"/edit-todo/" + todo._id}>
+                                <a style={{
+                                    width: "140px",
+                                    borderRadius: "3px",
+                                    letterSpacing: "1.5px",
+                                    color: "blue",
+                                    cursor: "pointer"
+                                }}
+                                // onClick={e => this.handleEdit(e, todo._id)} value={todo._id}
+                                >
+                                    <i className="material-icons left">create</i>
+                                </a>
+                            </Link>
+
+
                             <a style={{
                                 width: "140px",
                                 borderRadius: "3px",
@@ -98,12 +110,8 @@ class TodoLists extends Component {
             </form>
         );
         return (
-            <div className="container">
-                <div style={{ marginTop: "4rem" }} className="row">
-                    <div className="col s8 offset-s2">
-                        {todoItems}
-                    </div>
-                </div>
+            <div style={{ marginTop: "4rem" }} >
+                {todoItems}
             </div>
         )
     }

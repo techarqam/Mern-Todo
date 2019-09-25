@@ -43,6 +43,20 @@ router.post("/deleteTodo", (req, res) => {
         res.send("Deleted");
     })
 });
+router.post("/getonetodo", (req, res) => {
+    let todo = req.body.todo;
+    console.log(todo);
+    Todo.findById(todo, function (err, todo) {
+        res.send(todo);
+    })
+});
+router.post("/updateonetodo", (req, res) => {
+    let todo = req.body.todo;
+    console.log(todo)
+    Todo.findByIdAndUpdate(todo.id, todo, function (err, todo) {
+        res.send(todo);
+    })
+});
 
 
 

@@ -12,15 +12,14 @@ class Dashboard extends Component {
         this.props.logoutUser();
     };
     render() {
-        // const { user } = this.props.auth;
+        const { user } = this.props.auth;
         return (
 
-            // <CreateTodo />
-            <div>
+            // <div>
 
                 <div className="container">
                     <div style={{ marginTop: "4rem" }} className="row">
-                        <div className="col s8 offset-s2">
+                        <div className="col s8 ">
 
 
                             <Link
@@ -37,13 +36,44 @@ class Dashboard extends Component {
                                 Create Todo
               </Link>
 
+                            <TodoLists />
                         </div>
+
+
+                        <div
+                            className="col s4"
+                            style={{ textAlign: "center" }}
+                        >
+
+                            <h5><b>{user.name}</b></h5>
+                            <h5><b>{user.email}</b></h5>
+
+
+
+
+                            <button
+                                style={{
+                                    width: "150px",
+                                    borderRadius: "3px",
+                                    letterSpacing: "1.5px",
+                                    marginTop: "4rem",
+                                }}
+                                onClick={this.onLogoutClick}
+                                className="btn  waves-effect waves-light hoverable red accent-3"
+                            >
+                                Logout
+                            </button>
+
+
+
+                        </div>
+
+
                     </div>
                 </div>
 
 
-                <TodoLists />
-            </div>
+            // </div>
 
             // <div style={{ height: "75vh" }} className="container valign-wrapper">
             //     <div className="row">

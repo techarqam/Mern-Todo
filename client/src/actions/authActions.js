@@ -115,3 +115,27 @@ export const deleteTodo = (delTodoId, history) => dispatch => {
             })
         );
 };
+export const getSingleTodo = (todoId, history) => dispatch => {
+    return axios.post("/api/todos/getonetodo", { todo: todoId })
+        .then(todo => {
+            return todo;
+        })
+        .catch(err =>
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            })
+        );
+};
+export const updateSingleTodo = (todo, history) => dispatch => {
+    return axios.post("/api/todos/updateonetodo", { todo: todo })
+        .then(todo => {
+            return todo;
+        })
+        .catch(err =>
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            })
+        );
+};
