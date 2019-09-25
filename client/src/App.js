@@ -18,6 +18,8 @@ import PrivateRoute from "./components/private-route/PrivateRoute";
 import Dashboard from "./components/dashboard/Dashboard";
 import CreateTodo from "../src/components/todos/create-todo.component";
 import EditTodo from "../src/components/todos/edit-todo.component";
+import TodoShare from "../src/components/todos/share-todo.component";
+import SharedList from "../src/components/todos/shared-list.component";
 
 
 function App() {
@@ -46,6 +48,8 @@ function App() {
         <Route exact path="/login" component={Login} />
         <Route exact path="/create-todo" component={CreateTodo} />
         <Route exact path="/edit-todo/:id" component={EditTodo} />
+        <Route exact path="/share-todo/:id" component={TodoShare} />
+        <Route exact path="/shared-list" component={SharedList} />
 
         <Switch>
           <PrivateRoute exact path="/dashboard" component={Dashboard} />

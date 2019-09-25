@@ -17,60 +17,74 @@ class Dashboard extends Component {
 
             // <div>
 
-                <div className="container">
-                    <div style={{ marginTop: "4rem" }} className="row">
-                        <div className="col s8 ">
+            <div className="container">
+                <div style={{ marginTop: "4rem" }} className="row">
+                    <div className="col s8 ">
 
 
-                            <Link
-                                to="/create-todo"
-                                style={{
-                                    width: "140px",
-                                    borderRadius: "3px",
-                                    letterSpacing: "1.5px",
-                                    float: "right",
-                                }}
-                                className="btn  waves-effect waves-light hoverable blue accent-3"
-                            >
-                                <i className="material-icons left">add</i>
-                                Create Todo
+                        <Link
+                            to="/create-todo"
+                            style={{
+                                width: "140px",
+                                borderRadius: "3px",
+                                letterSpacing: "1.5px",
+                                float: "right",
+                            }}
+                            className="btn  waves-effect waves-light hoverable blue accent-3"
+                        >
+                            <i className="material-icons left">add</i>
+                            Create Todo
               </Link>
 
-                            <TodoLists />
-                        </div>
+                        <TodoLists />
+                    </div>
 
 
-                        <div
-                            className="col s4"
-                            style={{ textAlign: "center" }}
+                    <div
+                        className="col s4"
+                        style={{ textAlign: "center" }}
+                    >
+
+                        <h5><b>{user.name}</b></h5>
+                        <h5><b>{user.email}</b></h5>
+
+
+                        <Link
+                            to="/shared-list"
+                            style={{
+                                width: "150px",
+                                borderRadius: "3px",
+                                letterSpacing: "1.5px",
+                                textAlign: "center"
+                            }}
+                            className="btn  waves-effect waves-light hoverable blue accent-3"
                         >
-
-                            <h5><b>{user.name}</b></h5>
-                            <h5><b>{user.email}</b></h5>
-
+                            View Shared
+                        </Link>
 
 
 
-                            <button
-                                style={{
-                                    width: "150px",
-                                    borderRadius: "3px",
-                                    letterSpacing: "1.5px",
-                                    marginTop: "4rem",
-                                }}
-                                onClick={this.onLogoutClick}
-                                className="btn  waves-effect waves-light hoverable red accent-3"
-                            >
-                                Logout
+
+                        <button
+                            style={{
+                                width: "150px",
+                                borderRadius: "3px",
+                                letterSpacing: "1.5px",
+                                marginTop: "4rem",
+                            }}
+                            onClick={this.onLogoutClick}
+                            className="btn  waves-effect waves-light hoverable red accent-3"
+                        >
+                            Logout
                             </button>
 
 
 
-                        </div>
-
-
                     </div>
+
+
                 </div>
+            </div>
 
 
             // </div>

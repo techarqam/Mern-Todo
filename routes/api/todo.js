@@ -4,6 +4,8 @@ const router = express.Router();
 const validateTodo = require("../../validation/todo");
 
 const Todo = require("../../models/Todo");
+const SharedTodo = require("../../models/SharedTodo");
+const User = require("../../models/User");
 
 
 router.post("/todo", (req, res) => {
@@ -59,6 +61,54 @@ router.post("/updateonetodo", (req, res) => {
 });
 
 
+router.post("/sharetodo", (req, res) => {
+    let todo = req.body.todo;
+    console.log(todo)
+    todo.users.forEach(todoShare => {
+        var shareTodo = {
+            sharedTo: todoShare,
+            sharedBy: todo.sharedBy,
+            todoId: todo.todoId
+        }
+        console.log(shareTodo)
+        SharedTodo.create(shareTodo, function (err, todo) {
+        })
+    });
+    res.send(todo);
+});
+
+router.post("/getallshared", (req, res) => {
+    var user = req.body.user;
+    let todog = [];
+    SharedTodo.find({ sharedTo: user }, function (err, todos) {
+
+        todos.map(x => {
+            Todo.findById(x.todoId, function (err, todor) {
+                todog.push(todor);
+                console.log(todor)
+            })
+            console.log(todog)
+        })
+        console.log(todog)
+
+
+
+
+        //     for (var i = 0; i < todos.length; i++) {
+
+        //             // User.findById(todos[i].sharedBy, function (err, user) {
+        //             // todor.sharedBy = user.name;
+        //             todog.push(todor);
+        //             console.log(todor)
+        //             // })
+        //         })
+        //     }
+        //     console.log(todog)
+        res.send(todog);
+        // });
+
+    });
+});
 
 
 module.exports = router;

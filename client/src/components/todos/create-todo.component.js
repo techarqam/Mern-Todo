@@ -26,6 +26,10 @@ class CreateTodo extends Component {
         }
     }
 
+    handleCancel(e) {
+        e.preventDefault();
+        window.location = "/dashboard";
+    }
 
 
     onSubmit(e) {
@@ -99,7 +103,7 @@ class CreateTodo extends Component {
                                     {errors.passwordincorrect}
                                 </span> */}
                             </div>
-                            <div className="col s12" style={{ paddingLeft: "11.250px" }}>
+                            <div className="col s12" style={{ paddingLeft: "11.250px", float: "right" }}>
                                 <button
                                     style={{
                                         width: "150px",
@@ -113,6 +117,25 @@ class CreateTodo extends Component {
                                 >
                                     Add Todo
                 </button>
+
+                                <button
+                                    style={{
+                                        width: "150px",
+                                        borderRadius: "3px",
+                                        letterSpacing: "1.5px",
+                                        marginTop: "1rem",
+                                        float: "right",
+                                        marginRight: "1rem"
+                                    }}
+                                    onClick={e => this.handleCancel(e)}
+                                    className="btn btn-large waves-effect waves-light hoverable  blue-grey lighten-2"
+                                >
+                                    Cancel
+                </button>
+
+
+
+
                             </div>
                         </form>
                     </div>

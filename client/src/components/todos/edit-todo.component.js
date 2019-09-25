@@ -37,7 +37,10 @@ class EditTodo extends Component {
         this.setState({ [e.target.id]: e.target.value });
     };
 
-
+    handleCancel(e) {
+        e.preventDefault();
+        window.location = "/dashboard";
+    }
     onUpdate(e) {
         e.preventDefault();
         const newTodo = {
@@ -105,7 +108,7 @@ class EditTodo extends Component {
                                     {errors.passwordincorrect}
                                 </span> */}
                             </div>
-                            <div className="col s12" style={{ paddingLeft: "11.250px" }}>
+                            <div className="col s12" style={{ paddingLeft: "11.250px", float: "right" }}>
                                 <button
                                     style={{
                                         width: "150px",
@@ -115,9 +118,24 @@ class EditTodo extends Component {
                                         float: "right"
                                     }}
                                     type="submit"
-                                    className="btn btn-large waves-effect waves-light hoverable blue accent-3"
+                                    className="btn btn-large waves-effect waves-light hoverable "
                                 >
                                     Update Todo
+                </button>
+
+                                <button
+                                    style={{
+                                        width: "150px",
+                                        borderRadius: "3px",
+                                        letterSpacing: "1.5px",
+                                        marginTop: "1rem",
+                                        float: "right",
+                                        marginRight: "1rem"
+                                    }}
+                                    onClick={e => this.handleCancel(e)}
+                                    className="btn btn-large waves-effect waves-light hoverable  blue-grey lighten-2"
+                                >
+                                    Cancel
                 </button>
                             </div>
                         </form>

@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { deleteTodo, getAllTodos, updateTodoStatus } from "../../actions/authActions";
+import { getAllShared } from "../../actions/authActions";
 import { Link } from "react-router-dom";
 
-class TodoLists extends Component {
+class SharedList extends Component {
 
     constructor(props) {
         super(props);
@@ -12,12 +12,12 @@ class TodoLists extends Component {
     }
 
     componentWillMount() {
-        this.getAllTodos();
+        this.getAllSharedTodos();
     }
 
-    getAllTodos() {
-        console.log(this.props.auth.user.id);
-        this.props.getAllTodos(this.props.auth.user.id).then(todos => {
+    getAllSharedTodos() {
+        console.log(this.props.auth.user.id)
+        this.props.getAllShared(this.props.auth.user.id).then(todos => {
             this.setState({ todos: todos.data });
         })
     }
@@ -28,12 +28,6 @@ class TodoLists extends Component {
             "_id": target.value
         }
         this.props.updateTodoStatus(todoUpdate);
-    }
-    handleDelete(e, id) {
-        e.preventDefault();
-        this.props.deleteTodo(id).then(() => {
-            this.getAllTodos();
-        })
     }
 
 
@@ -103,8 +97,6 @@ class TodoLists extends Component {
                         </span>
 
 
-                        {/* <i className="material-icons icon-red"  >delete</i> */}
-
                     </label>
                 </p>
                 <br />
@@ -112,8 +104,16 @@ class TodoLists extends Component {
         );
 
         return (
-            <div style={{ marginTop: "6rem" }} >
-                {todoItems}
+
+            <div className="container">
+                <div style={{ marginTop: "4rem" }} className="row">
+                    <div className="col s8 ">
+
+                        <div style={{ marginTop: "6rem" }} >
+                            {todoItems}
+                        </div>
+                    </div>
+                </div>
             </div>
         )
     }
@@ -123,7 +123,7 @@ class TodoLists extends Component {
 
 
 
-TodoLists.propTypes = {
+SharedList.propTypes = {
     auth: PropTypes.object.isRequired,
     errors: PropTypes.object.isRequired
 };
@@ -133,5 +133,5 @@ const mapStateToProps = state => ({
 });
 export default connect(
     mapStateToProps,
-    { deleteTodo, getAllTodos, updateTodoStatus }
-)(TodoLists);
+    { getAllShared }
+)(SharedList);

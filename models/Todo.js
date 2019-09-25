@@ -13,6 +13,9 @@ const TodoSchema = new Schema({
         type: String,
         required: true,
     },
+    sharedByName: {
+        type: String,
+    },
     completed: {
         type: Boolean,
         required: true,

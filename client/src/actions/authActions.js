@@ -139,3 +139,43 @@ export const updateSingleTodo = (todo, history) => dispatch => {
             })
         );
 };
+export const getAllUsers = (history) => dispatch => {
+    return axios.get("/api/users/getallusers")
+        .then(users => {
+            return users;
+        })
+        .catch(err =>
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            })
+        );
+};
+export const shareToUsers = (todo, history) => dispatch => {
+    console.log(todo)
+    return axios.post("/api/todos/sharetodo", { todo: todo })
+        .then(users => {
+            return users;
+        })
+        .catch(err =>
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            })
+        );
+};
+
+export const getAllShared = (uid, history) => dispatch => {
+    console.log(uid)
+
+    return axios.post("/api/todos/getallshared", { user: uid })
+        .then(todos => {
+            return todos;
+        })
+        .catch(err =>
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            })
+        );
+};
